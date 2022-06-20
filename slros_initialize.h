@@ -11,11 +11,11 @@ extern const std::string SLROSNodeName;
 // For Block microaccel/MicroAccel/Subscribe
 extern SimulinkSubscriber<std_msgs::Float64MultiArray, SL_Bus_microaccel_std_msgs_Float64MultiArray> Sub_microaccel_599;
 
-// For Block microaccel/MicroAccel/Subscribe1
-extern SimulinkSubscriber<geometry_msgs::Twist, SL_Bus_microaccel_geometry_msgs_Twist> Sub_microaccel_570;
-
 // For Block microaccel/MicroAccel/Subscribe2
 extern SimulinkSubscriber<std_msgs::Float64, SL_Bus_microaccel_std_msgs_Float64> Sub_microaccel_576;
+
+// For Block microaccel/MicroAccel/Subscribe4
+extern SimulinkSubscriber<geometry_msgs::Twist, SL_Bus_microaccel_geometry_msgs_Twist> Sub_microaccel_624;
 
 // For Block microaccel/MicroAccel/Subscribe6
 extern SimulinkSubscriber<std_msgs::Float64, SL_Bus_microaccel_std_msgs_Float64> Sub_microaccel_562;

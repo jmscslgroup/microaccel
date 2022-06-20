@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'microaccel'.
 //
-// Model version                  : 3.200
+// Model version                  : 3.204
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri May 20 18:43:49 2022
+// C/C++ source code generated on : Sun Jun 19 18:16:15 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -112,40 +112,44 @@ void microaccel_step(void)
   // End of Outputs for SubSystem: '<S16>/Enabled Subsystem'
   // End of Outputs for SubSystem: '<S1>/Subscribe6'
 
-  // Outputs for Atomic SubSystem: '<S1>/Subscribe1'
-  // MATLABSystem: '<S14>/SourceBlock' incorporates:
-  //   Inport: '<S19>/In1'
-
-  b_varargout_1 = Sub_microaccel_570.getLatestMessage
-    (&microaccel_B.BusAssignment1);
-
-  // Outputs for Enabled SubSystem: '<S14>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S19>/Enable'
-
-  if (b_varargout_1) {
-    microaccel_B.In1_p = microaccel_B.BusAssignment1;
-  }
-
-  // End of MATLABSystem: '<S14>/SourceBlock'
-  // End of Outputs for SubSystem: '<S14>/Enabled Subsystem'
-  // End of Outputs for SubSystem: '<S1>/Subscribe1'
-
-  // Outputs for Atomic SubSystem: '<S1>/Subscribe2'
+  // Outputs for Atomic SubSystem: '<S1>/Subscribe4'
   // MATLABSystem: '<S15>/SourceBlock' incorporates:
   //   Inport: '<S20>/In1'
 
-  b_varargout_1 = Sub_microaccel_576.getLatestMessage
-    (&microaccel_B.b_varargout_2_m);
+  b_varargout_1 = Sub_microaccel_624.getLatestMessage
+    (&microaccel_B.BusAssignment1);
 
   // Outputs for Enabled SubSystem: '<S15>/Enabled Subsystem' incorporates:
   //   EnablePort: '<S20>/Enable'
 
   if (b_varargout_1) {
-    microaccel_B.In1_k = microaccel_B.b_varargout_2_m;
+    microaccel_B.In1_n = microaccel_B.BusAssignment1;
   }
 
   // End of MATLABSystem: '<S15>/SourceBlock'
   // End of Outputs for SubSystem: '<S15>/Enabled Subsystem'
+  // End of Outputs for SubSystem: '<S1>/Subscribe4'
+
+  // Sum: '<S1>/Subtract2'
+  microaccel_B.Subtract2 = microaccel_B.In1_n.Linear.Z +
+    microaccel_B.In1_e.Linear.X;
+
+  // Outputs for Atomic SubSystem: '<S1>/Subscribe2'
+  // MATLABSystem: '<S14>/SourceBlock' incorporates:
+  //   Inport: '<S19>/In1'
+
+  b_varargout_1 = Sub_microaccel_576.getLatestMessage
+    (&microaccel_B.b_varargout_2_m);
+
+  // Outputs for Enabled SubSystem: '<S14>/Enabled Subsystem' incorporates:
+  //   EnablePort: '<S19>/Enable'
+
+  if (b_varargout_1) {
+    microaccel_B.In1_k = microaccel_B.b_varargout_2_m;
+  }
+
+  // End of MATLABSystem: '<S14>/SourceBlock'
+  // End of Outputs for SubSystem: '<S14>/Enabled Subsystem'
   // End of Outputs for SubSystem: '<S1>/Subscribe2'
 
   // MATLABSystem: '<S1>/Current Time2'
@@ -208,13 +212,13 @@ void microaccel_step(void)
     microaccel_DW.t_length = 1.0;
     memset(&microaccel_DW.time_avg_target[0], 0, 1280U * sizeof(real_T));
     microaccel_DW.time_avg_target_not_empty = true;
-    microaccel_DW.time_avg_target[1279] = microaccel_B.In1_p.Linear.X;
+    microaccel_DW.time_avg_target[1279] = microaccel_B.Subtract2;
   } else {
     for (i = 0; i < 1279; i++) {
       microaccel_DW.time_avg_target[i] = microaccel_DW.time_avg_target[i + 1];
     }
 
-    microaccel_DW.time_avg_target[1279] = microaccel_B.In1_p.Linear.X;
+    microaccel_DW.time_avg_target[1279] = microaccel_B.Subtract2;
     if (microaccel_DW.t_length < 1280.0) {
       microaccel_DW.t_length++;
     }
@@ -266,18 +270,18 @@ void microaccel_step(void)
 
   if ((1.0 > microaccel_B.In1_e.Linear.X) || rtIsNaN(microaccel_B.In1_e.Linear.X))
   {
-    microaccel_B.a_12 = 1.0;
+    microaccel_B.a_0 = 1.0;
   } else {
-    microaccel_B.a_12 = microaccel_B.In1_e.Linear.X;
+    microaccel_B.a_0 = microaccel_B.In1_e.Linear.X;
   }
 
-  microaccel_B.a_12 = (microaccel_B.In1_i.Data - 3.0 *
-                       microaccel_B.In1_e.Linear.X) * 5.0 / microaccel_B.a_12;
-  if ((0.0 > microaccel_B.a_12) || rtIsNaN(microaccel_B.a_12)) {
-    microaccel_B.a_12 = 0.0;
+  microaccel_B.a_0 = (microaccel_B.In1_i.Data - 3.0 *
+                      microaccel_B.In1_e.Linear.X) * 5.0 / microaccel_B.a_0;
+  if ((0.0 > microaccel_B.a_0) || rtIsNaN(microaccel_B.a_0)) {
+    microaccel_B.a_0 = 0.0;
   }
 
-  microaccel_B.bsum = ((microaccel_B.a_12 * microaccel_B.a_12 * 0.1 +
+  microaccel_B.bsum = ((microaccel_B.a_0 * microaccel_B.a_0 * 0.1 +
                         (microaccel_B.v_des_dot + microaccel_B.bsum) /
                         microaccel_DW.t_length) + 4.0 * microaccel_B.v_des_data)
     / 5.0;
@@ -291,14 +295,13 @@ void microaccel_step(void)
 
   microaccel_DW.previous_v_des = microaccel_B.bsum;
   if (microaccel_B.In1_i.Data - 2.0 > 0.0) {
-    microaccel_B.a_12 = microaccel_B.In1_i.Data - 2.0;
+    microaccel_B.a_0 = microaccel_B.In1_i.Data - 2.0;
   } else {
-    microaccel_B.a_12 = 0.0;
+    microaccel_B.a_0 = 0.0;
   }
 
-  microaccel_B.v_max = sqrt((microaccel_B.In1_p.Linear.X *
-    microaccel_B.In1_p.Linear.X * 0.5 / fabs(microaccel_B.v_max) +
-    microaccel_B.a_12) * 6.0);
+  microaccel_B.v_max = sqrt((microaccel_B.Subtract2 * microaccel_B.Subtract2 *
+    0.5 / fabs(microaccel_B.v_max) + microaccel_B.a_0) * 6.0);
   if (!microaccel_DW.previous_v_max_not_empty) {
     microaccel_DW.previous_v_max_not_empty = true;
     microaccel_B.Subtract1 = 0.0;
@@ -313,48 +316,44 @@ void microaccel_step(void)
   microaccel_DW.previous_v_max = microaccel_B.v_max;
   if ((0.0 > microaccel_B.In1_i.Data - 2.0) || rtIsNaN(microaccel_B.In1_i.Data -
        2.0)) {
-    microaccel_B.a_12 = 0.0;
+    microaccel_B.a_0 = 0.0;
   } else {
-    microaccel_B.a_12 = microaccel_B.In1_i.Data - 2.0;
+    microaccel_B.a_0 = microaccel_B.In1_i.Data - 2.0;
   }
 
   microaccel_B.a_12 = microaccel_B.In1_e.Linear.X * microaccel_B.In1_e.Linear.X *
-    -0.5 / ((microaccel_B.In1_p.Linear.X + 0.001) * (microaccel_B.In1_p.Linear.X
-             + 0.001) * 0.5 / fabs(microaccel_B.In1_k.Data - 0.01) +
-            microaccel_B.a_12);
+    -0.5 / ((microaccel_B.Subtract2 + 0.001) * (microaccel_B.Subtract2 + 0.001) *
+            0.5 / fabs(microaccel_B.In1_k.Data - 0.01) + microaccel_B.a_0);
   microaccel_B.a_0 = microaccel_B.In1_k.Data * microaccel_B.In1_e.Linear.X /
-    (microaccel_B.In1_p.Linear.X + 0.001);
+    (microaccel_B.Subtract2 + 0.001);
   if (microaccel_B.In1_k.Data < 0.0) {
     if (microaccel_B.a_12 > microaccel_B.a_0) {
       microaccel_B.a_0 = microaccel_B.a_12;
-    } else if (!(microaccel_B.In1_p.Linear.X >= microaccel_B.In1_e.Linear.X)) {
-      microaccel_B.a_0 = microaccel_B.In1_e.Linear.X -
-        microaccel_B.In1_p.Linear.X;
+    } else if (!(microaccel_B.Subtract2 >= microaccel_B.In1_e.Linear.X)) {
+      microaccel_B.a_12 = microaccel_B.In1_e.Linear.X - microaccel_B.Subtract2;
       if (microaccel_B.In1_i.Data - 2.0 > 0.001) {
-        microaccel_B.a_12 = microaccel_B.In1_i.Data - 2.0;
+        microaccel_B.a_0 = microaccel_B.In1_i.Data - 2.0;
       } else {
-        microaccel_B.a_12 = 0.001;
+        microaccel_B.a_0 = 0.001;
       }
 
-      microaccel_B.a_0 = microaccel_B.In1_k.Data - microaccel_B.a_0 *
-        microaccel_B.a_0 * 0.5 / microaccel_B.a_12;
+      microaccel_B.a_0 = microaccel_B.In1_k.Data - microaccel_B.a_12 *
+        microaccel_B.a_12 * 0.5 / microaccel_B.a_0;
     }
   } else if (microaccel_B.In1_k.Data >= 0.0) {
-    if (microaccel_B.In1_e.Linear.X >= microaccel_B.In1_p.Linear.X) {
-      microaccel_B.a_0 = microaccel_B.In1_e.Linear.X -
-        microaccel_B.In1_p.Linear.X;
+    if (microaccel_B.In1_e.Linear.X >= microaccel_B.Subtract2) {
+      microaccel_B.a_12 = microaccel_B.In1_e.Linear.X - microaccel_B.Subtract2;
       if (microaccel_B.In1_i.Data - 2.0 > 0.001) {
-        microaccel_B.a_12 = microaccel_B.In1_i.Data - 2.0;
+        microaccel_B.a_0 = microaccel_B.In1_i.Data - 2.0;
       } else {
-        microaccel_B.a_12 = 0.001;
+        microaccel_B.a_0 = 0.001;
       }
 
-      microaccel_B.a_0 = microaccel_B.In1_k.Data - microaccel_B.a_0 *
-        microaccel_B.a_0 * 0.5 / microaccel_B.a_12;
+      microaccel_B.a_0 = microaccel_B.In1_k.Data - microaccel_B.a_12 *
+        microaccel_B.a_12 * 0.5 / microaccel_B.a_0;
     } else {
-      microaccel_B.a_0 = (microaccel_B.In1_p.Linear.X -
-                          microaccel_B.In1_e.Linear.X) * microaccel_B.In1_k.Data
-        + microaccel_B.In1_k.Data;
+      microaccel_B.a_0 = (microaccel_B.Subtract2 - microaccel_B.In1_e.Linear.X) *
+        microaccel_B.In1_k.Data + microaccel_B.In1_k.Data;
       if ((1.0 < microaccel_B.a_0) || rtIsNaN(microaccel_B.a_0)) {
         microaccel_B.a_0 = 1.0;
       }
@@ -363,28 +362,26 @@ void microaccel_step(void)
     microaccel_B.a_0 = (rtNaN);
   }
 
-  if ((microaccel_B.In1_e.Linear.X > microaccel_B.In1_p.Linear.X) || rtIsNaN
-      (microaccel_B.In1_p.Linear.X)) {
-    microaccel_B.a_12 = microaccel_B.In1_e.Linear.X;
-  } else {
-    microaccel_B.a_12 = microaccel_B.In1_p.Linear.X;
+  if ((microaccel_B.In1_e.Linear.X > microaccel_B.Subtract2) || rtIsNaN
+      (microaccel_B.Subtract2)) {
+    microaccel_B.Subtract2 = microaccel_B.In1_e.Linear.X;
   }
 
-  if (microaccel_B.In1_i.Data > microaccel_B.a_12 * 5.0) {
+  if (microaccel_B.In1_i.Data > microaccel_B.Subtract2 * 5.0) {
     microaccel_B.a_0 = 1.0;
   }
 
   microaccel_DW.previous_dx = microaccel_B.In1_i.Data;
-  microaccel_B.a_12 = -(microaccel_B.In1_e.Linear.X - microaccel_B.bsum) +
+  microaccel_B.Subtract2 = -(microaccel_B.In1_e.Linear.X - microaccel_B.bsum) +
     microaccel_B.v_des_dot;
-  if (!(microaccel_B.a_12 > -1.0)) {
-    microaccel_B.a_12 = -1.0;
+  if (!(microaccel_B.Subtract2 > -1.0)) {
+    microaccel_B.Subtract2 = -1.0;
   }
 
   microaccel_B.Subtract1 += -(microaccel_B.In1_e.Linear.X - microaccel_B.v_max);
-  if ((microaccel_B.a_12 < microaccel_B.Subtract1) || rtIsNaN
+  if ((microaccel_B.Subtract2 < microaccel_B.Subtract1) || rtIsNaN
       (microaccel_B.Subtract1)) {
-    microaccel_B.v_des_dot = microaccel_B.a_12;
+    microaccel_B.v_des_dot = microaccel_B.Subtract2;
   } else {
     microaccel_B.v_des_dot = microaccel_B.Subtract1;
   }
@@ -439,7 +436,7 @@ void microaccel_step(void)
   // BusAssignment: '<S1>/Bus Assignment2' incorporates:
   //   MATLAB Function: '<S1>/MATLAB Function'
 
-  rtb_BusAssignment2.Data = microaccel_B.a_12;
+  rtb_BusAssignment2.Data = microaccel_B.Subtract2;
 
   // Outputs for Atomic SubSystem: '<S1>/Publish3'
   // MATLABSystem: '<S10>/SinkBlock'
@@ -483,15 +480,15 @@ void microaccel_initialize(void)
 
   {
     int32_T i;
-    char_T b_zeroDelimTopic_4[13];
+    char_T b_zeroDelimName[17];
     char_T b_zeroDelimTopic_2[11];
     char_T b_zeroDelimTopic_0[10];
-    char_T b_zeroDelimTopic_1[9];
-    char_T b_zeroDelimTopic_3[8];
+    char_T b_zeroDelimTopic_3[9];
+    char_T b_zeroDelimTopic_1[8];
     char_T b_zeroDelimTopic[4];
     static const char_T tmp[9] = { 'l', 'e', 'a', 'd', '_', 'd', 'i', 's', 't' };
 
-    static const char_T tmp_0[8] = { 'l', 'e', 'a', 'd', '_', 'v', 'e', 'l' };
+    static const char_T tmp_0[7] = { 'r', 'e', 'l', '_', 'v', 'e', 'l' };
 
     static const char_T tmp_1[10] = { 'l', 'e', 'a', 'd', '_', 'a', 'c', 'c',
       'e', 'l' };
@@ -501,8 +498,8 @@ void microaccel_initialize(void)
 
     static const char_T tmp_3[7] = { 'c', 'm', 'd', '_', 'v', 'e', 'l' };
 
-    static const char_T tmp_4[12] = { 'a', 'c', 'c', 'e', 'l', 'e', 'r', 'a',
-      't', 'i', 'o', 'n' };
+    static const char_T tmp_4[9] = { 'c', 'm', 'd', '_', 'a', 'c', 'c', 'e', 'l'
+    };
 
     static const char_T tmp_5[9] = { 'a', '_', 'v', 'd', 'e', 's', 'o', 'u', 't'
     };
@@ -562,39 +559,39 @@ void microaccel_initialize(void)
     // End of Start for MATLABSystem: '<S16>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<S1>/Subscribe6'
 
-    // SystemInitialize for Atomic SubSystem: '<S1>/Subscribe1'
-    // SystemInitialize for Enabled SubSystem: '<S14>/Enabled Subsystem'
-    // SystemInitialize for Outport: '<S19>/Out1' incorporates:
-    //   Inport: '<S19>/In1'
-
-    microaccel_B.In1_p = microaccel_P.Out1_Y0_a;
-
-    // End of SystemInitialize for SubSystem: '<S14>/Enabled Subsystem'
-
-    // Start for MATLABSystem: '<S14>/SourceBlock'
-    microaccel_DW.obj_a.matlabCodegenIsDeleted = false;
-    microaccel_DW.obj_a.isInitialized = 1;
-    for (i = 0; i < 8; i++) {
-      b_zeroDelimTopic_1[i] = tmp_0[i];
-    }
-
-    b_zeroDelimTopic_1[8] = '\x00';
-    Sub_microaccel_570.createSubscriber(&b_zeroDelimTopic_1[0], 1);
-    microaccel_DW.obj_a.isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S14>/SourceBlock'
-    // End of SystemInitialize for SubSystem: '<S1>/Subscribe1'
-
-    // SystemInitialize for Atomic SubSystem: '<S1>/Subscribe2'
+    // SystemInitialize for Atomic SubSystem: '<S1>/Subscribe4'
     // SystemInitialize for Enabled SubSystem: '<S15>/Enabled Subsystem'
     // SystemInitialize for Outport: '<S20>/Out1' incorporates:
     //   Inport: '<S20>/In1'
 
-    microaccel_B.In1_k = microaccel_P.Out1_Y0_j;
+    microaccel_B.In1_n = microaccel_P.Out1_Y0_k;
 
     // End of SystemInitialize for SubSystem: '<S15>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S15>/SourceBlock'
+    microaccel_DW.obj_h.matlabCodegenIsDeleted = false;
+    microaccel_DW.obj_h.isInitialized = 1;
+    for (i = 0; i < 7; i++) {
+      b_zeroDelimTopic_1[i] = tmp_0[i];
+    }
+
+    b_zeroDelimTopic_1[7] = '\x00';
+    Sub_microaccel_624.createSubscriber(&b_zeroDelimTopic_1[0], 1);
+    microaccel_DW.obj_h.isSetupComplete = true;
+
+    // End of Start for MATLABSystem: '<S15>/SourceBlock'
+    // End of SystemInitialize for SubSystem: '<S1>/Subscribe4'
+
+    // SystemInitialize for Atomic SubSystem: '<S1>/Subscribe2'
+    // SystemInitialize for Enabled SubSystem: '<S14>/Enabled Subsystem'
+    // SystemInitialize for Outport: '<S19>/Out1' incorporates:
+    //   Inport: '<S19>/In1'
+
+    microaccel_B.In1_k = microaccel_P.Out1_Y0_j;
+
+    // End of SystemInitialize for SubSystem: '<S14>/Enabled Subsystem'
+
+    // Start for MATLABSystem: '<S14>/SourceBlock'
     microaccel_DW.obj_d.matlabCodegenIsDeleted = false;
     microaccel_DW.obj_d.isInitialized = 1;
     for (i = 0; i < 10; i++) {
@@ -605,7 +602,7 @@ void microaccel_initialize(void)
     Sub_microaccel_576.createSubscriber(&b_zeroDelimTopic_2[0], 1);
     microaccel_DW.obj_d.isSetupComplete = true;
 
-    // End of Start for MATLABSystem: '<S15>/SourceBlock'
+    // End of Start for MATLABSystem: '<S14>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<S1>/Subscribe2'
 
     // SystemInitialize for Atomic SubSystem: '<S1>/Subscribe'
@@ -636,11 +633,11 @@ void microaccel_initialize(void)
     microaccel_DW.obj_c.matlabCodegenIsDeleted = false;
     microaccel_DW.obj_c.isInitialized = 1;
     for (i = 0; i < 7; i++) {
-      b_zeroDelimTopic_3[i] = tmp_3[i];
+      b_zeroDelimTopic_1[i] = tmp_3[i];
     }
 
-    b_zeroDelimTopic_3[7] = '\x00';
-    Pub_microaccel_592.createPublisher(&b_zeroDelimTopic_3[0], 1);
+    b_zeroDelimTopic_1[7] = '\x00';
+    Pub_microaccel_592.createPublisher(&b_zeroDelimTopic_1[0], 1);
     microaccel_DW.obj_c.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S8>/SinkBlock'
@@ -650,12 +647,12 @@ void microaccel_initialize(void)
     // Start for MATLABSystem: '<S9>/SinkBlock'
     microaccel_DW.obj_n5.matlabCodegenIsDeleted = false;
     microaccel_DW.obj_n5.isInitialized = 1;
-    for (i = 0; i < 12; i++) {
-      b_zeroDelimTopic_4[i] = tmp_4[i];
+    for (i = 0; i < 9; i++) {
+      b_zeroDelimTopic_0[i] = tmp_4[i];
     }
 
-    b_zeroDelimTopic_4[12] = '\x00';
-    Pub_microaccel_609.createPublisher(&b_zeroDelimTopic_4[0], 1);
+    b_zeroDelimTopic_0[9] = '\x00';
+    Pub_microaccel_609.createPublisher(&b_zeroDelimTopic_0[0], 1);
     microaccel_DW.obj_n5.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S9>/SinkBlock'
@@ -696,11 +693,11 @@ void microaccel_initialize(void)
     microaccel_DW.obj_n.matlabCodegenIsDeleted = false;
     microaccel_DW.obj_n.isInitialized = 1;
     for (i = 0; i < 8; i++) {
-      b_zeroDelimTopic_1[i] = tmp_7[i];
+      b_zeroDelimTopic_3[i] = tmp_7[i];
     }
 
-    b_zeroDelimTopic_1[8] = '\x00';
-    Pub_microaccel_612.createPublisher(&b_zeroDelimTopic_1[0], 1);
+    b_zeroDelimTopic_3[8] = '\x00';
+    Pub_microaccel_612.createPublisher(&b_zeroDelimTopic_3[0], 1);
     microaccel_DW.obj_n.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S12>/SinkBlock'
@@ -715,11 +712,11 @@ void microaccel_initialize(void)
     microaccel_DW.obj_e.matlabCodegenIsDeleted = false;
     microaccel_DW.obj_e.isInitialized = 1;
     for (i = 0; i < 16; i++) {
-      microaccel_B.b_zeroDelimName[i] = tmp_8[i];
+      b_zeroDelimName[i] = tmp_8[i];
     }
 
-    microaccel_B.b_zeroDelimName[16] = '\x00';
-    ParamGet_microaccel_585.initialize(&microaccel_B.b_zeroDelimName[0]);
+    b_zeroDelimName[16] = '\x00';
+    ParamGet_microaccel_585.initialize(&b_zeroDelimName[0]);
     ParamGet_microaccel_585.initialize_error_codes(0, 1, 2, 3);
     ParamGet_microaccel_585.set_initial_value(-4.5);
     microaccel_DW.obj_e.isSetupComplete = true;
@@ -749,22 +746,22 @@ void microaccel_terminate(void)
   // End of Terminate for MATLABSystem: '<S16>/SourceBlock'
   // End of Terminate for SubSystem: '<S1>/Subscribe6'
 
-  // Terminate for Atomic SubSystem: '<S1>/Subscribe1'
-  // Terminate for MATLABSystem: '<S14>/SourceBlock'
-  if (!microaccel_DW.obj_a.matlabCodegenIsDeleted) {
-    microaccel_DW.obj_a.matlabCodegenIsDeleted = true;
+  // Terminate for Atomic SubSystem: '<S1>/Subscribe4'
+  // Terminate for MATLABSystem: '<S15>/SourceBlock'
+  if (!microaccel_DW.obj_h.matlabCodegenIsDeleted) {
+    microaccel_DW.obj_h.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S14>/SourceBlock'
-  // End of Terminate for SubSystem: '<S1>/Subscribe1'
+  // End of Terminate for MATLABSystem: '<S15>/SourceBlock'
+  // End of Terminate for SubSystem: '<S1>/Subscribe4'
 
   // Terminate for Atomic SubSystem: '<S1>/Subscribe2'
-  // Terminate for MATLABSystem: '<S15>/SourceBlock'
+  // Terminate for MATLABSystem: '<S14>/SourceBlock'
   if (!microaccel_DW.obj_d.matlabCodegenIsDeleted) {
     microaccel_DW.obj_d.matlabCodegenIsDeleted = true;
   }
 
-  // End of Terminate for MATLABSystem: '<S15>/SourceBlock'
+  // End of Terminate for MATLABSystem: '<S14>/SourceBlock'
   // End of Terminate for SubSystem: '<S1>/Subscribe2'
 
   // Terminate for MATLABSystem: '<S1>/Current Time2'

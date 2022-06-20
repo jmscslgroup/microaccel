@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'microaccel'.
 //
-// Model version                  : 3.200
+// Model version                  : 3.204
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Fri May 20 18:43:49 2022
+// C/C++ source code generated on : Sun Jun 19 18:16:15 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -682,8 +682,8 @@ P_microaccel_T microaccel_P = {
     }                                  // Angular
   },
 
-  // Computed Parameter: Out1_Y0_a
-  //  Referenced by: '<S19>/Out1'
+  // Computed Parameter: Out1_Y0_k
+  //  Referenced by: '<S20>/Out1'
 
   {
     {
@@ -699,8 +699,8 @@ P_microaccel_T microaccel_P = {
     }                                  // Angular
   },
 
-  // Computed Parameter: Constant_Value_m
-  //  Referenced by: '<S14>/Constant'
+  // Computed Parameter: Constant_Value_n
+  //  Referenced by: '<S15>/Constant'
 
   {
     {
@@ -779,14 +779,14 @@ P_microaccel_T microaccel_P = {
   },
 
   // Computed Parameter: Out1_Y0_j
-  //  Referenced by: '<S20>/Out1'
+  //  Referenced by: '<S19>/Out1'
 
   {
     0.0                                // Data
   },
 
   // Computed Parameter: Constant_Value_g
-  //  Referenced by: '<S15>/Constant'
+  //  Referenced by: '<S14>/Constant'
 
   {
     0.0                                // Data

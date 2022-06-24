@@ -36,6 +36,9 @@ SimulinkPublisher<std_msgs::Float64, SL_Bus_microaccel_std_msgs_Float64> Pub_mic
 // For Block microaccel/MicroAccel/Get Parameter
 SimulinkParameterGetter<real64_T, double> ParamGet_microaccel_585;
 
+// For Block microaccel/MicroAccel/Get Parameter1
+SimulinkParameterGetter<boolean_T, bool> ParamGet_microaccel_631;
+
 void slros_node_init(int argc, char** argv)
 {
   ros::init(argc, argv, SLROSNodeName);

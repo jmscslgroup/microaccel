@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'microaccel'.
 //
-// Model version                  : 3.204
+// Model version                  : 3.210
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Sun Jun 19 18:16:15 2022
+// C/C++ source code generated on : Thu Jun 23 20:00:45 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -65,9 +65,9 @@ void microaccel_step(void)
   SL_Bus_microaccel_std_msgs_Float64 rtb_BusAssignment2;
   SL_Bus_microaccel_std_msgs_Float64 rtb_BusAssignment3;
   SL_Bus_microaccel_std_msgs_Float64 rtb_BusAssignment4;
-  SL_Bus_microaccel_std_msgs_Float64 rtb_BusAssignment5;
   int32_T i;
   int32_T k;
+  int32_T weight_down;
   uint32_T b_varargout_2_Data_SL_Info_Curr;
   uint32_T b_varargout_2_Data_SL_Info_Rece;
   uint32_T b_varargout_2_Layout_DataOffset;
@@ -205,9 +205,14 @@ void microaccel_step(void)
   // End of Outputs for SubSystem: '<S13>/Enabled Subsystem'
   // End of Outputs for SubSystem: '<S1>/Subscribe'
 
+  // MATLABSystem: '<S1>/Get Parameter1'
+  ParamGet_microaccel_631.get_parameter(&b_varargout_1);
+
   // MATLAB Function: '<S1>/MATLAB Function' incorporates:
   //   MATLABSystem: '<S1>/Get Parameter'
+  //   MATLABSystem: '<S1>/Get Parameter1'
 
+  weight_down = 4;
   if (!microaccel_DW.time_avg_target_not_empty) {
     microaccel_DW.t_length = 1.0;
     memset(&microaccel_DW.time_avg_target[0], 0, 1280U * sizeof(real_T));
@@ -229,33 +234,38 @@ void microaccel_step(void)
     microaccel_DW.previous_dx_not_empty = true;
   }
 
-  if (!rtIsNaN(microaccel_B.In1.Data[0])) {
-    i = 1;
-  } else {
-    i = 0;
-    k = 2;
-    exitg1 = false;
-    while ((!exitg1) && (k < 129)) {
-      if (!rtIsNaN(microaccel_B.In1.Data[k - 1])) {
-        i = k;
-        exitg1 = true;
-      } else {
-        k++;
+  if (b_varargout_1) {
+    if (!rtIsNaN(microaccel_B.In1.Data[0])) {
+      i = 1;
+    } else {
+      i = 0;
+      k = 2;
+      exitg1 = false;
+      while ((!exitg1) && (k < 129)) {
+        if (!rtIsNaN(microaccel_B.In1.Data[k - 1])) {
+          i = k;
+          exitg1 = true;
+        } else {
+          k++;
+        }
       }
     }
-  }
 
-  if (i == 0) {
-    microaccel_B.v_des_data = microaccel_B.In1.Data[0];
-  } else {
-    microaccel_B.v_des_data = microaccel_B.In1.Data[i - 1];
-    while (i + 1 < 129) {
-      if (microaccel_B.v_des_data > microaccel_B.In1.Data[i]) {
-        microaccel_B.v_des_data = microaccel_B.In1.Data[i];
+    if (i == 0) {
+      microaccel_B.v_des_data = microaccel_B.In1.Data[0];
+    } else {
+      microaccel_B.v_des_data = microaccel_B.In1.Data[i - 1];
+      while (i + 1 < 129) {
+        if (microaccel_B.v_des_data > microaccel_B.In1.Data[i]) {
+          microaccel_B.v_des_data = microaccel_B.In1.Data[i];
+        }
+
+        i++;
       }
-
-      i++;
     }
+  } else {
+    weight_down = 0;
+    microaccel_B.v_des_data = 15.0;
   }
 
   microaccel_B.v_des_dot = microaccel_DW.time_avg_target[0];
@@ -283,8 +293,9 @@ void microaccel_step(void)
 
   microaccel_B.bsum = ((microaccel_B.a_0 * microaccel_B.a_0 * 0.1 +
                         (microaccel_B.v_des_dot + microaccel_B.bsum) /
-                        microaccel_DW.t_length) + 4.0 * microaccel_B.v_des_data)
-    / 5.0;
+                        microaccel_DW.t_length) + static_cast<real_T>
+                       (weight_down) * microaccel_B.v_des_data) /
+    (static_cast<real_T>(weight_down) + 1.0);
   if (!microaccel_DW.previous_v_des_not_empty) {
     microaccel_DW.previous_v_des_not_empty = true;
     microaccel_B.v_des_dot = 0.0;
@@ -425,11 +436,11 @@ void microaccel_step(void)
   // BusAssignment: '<S1>/Bus Assignment5' incorporates:
   //   MATLAB Function: '<S1>/MATLAB Function'
 
-  rtb_BusAssignment5.Data = microaccel_B.v_des_dot;
+  microaccel_B.BusAssignment5.Data = microaccel_B.v_des_dot;
 
   // Outputs for Atomic SubSystem: '<S1>/Publish2'
   // MATLABSystem: '<S9>/SinkBlock'
-  Pub_microaccel_609.publish(&rtb_BusAssignment5);
+  Pub_microaccel_609.publish(&microaccel_B.BusAssignment5);
 
   // End of Outputs for SubSystem: '<S1>/Publish2'
 
@@ -480,7 +491,7 @@ void microaccel_initialize(void)
 
   {
     int32_T i;
-    char_T b_zeroDelimName[17];
+    char_T b_zeroDelimName[14];
     char_T b_zeroDelimTopic_2[11];
     char_T b_zeroDelimTopic_0[10];
     char_T b_zeroDelimTopic_3[9];
@@ -512,6 +523,9 @@ void microaccel_initialize(void)
     static const char_T tmp_8[16] = { 'm', 'a', 'x', '_', 'd', 'e', 'a', 'c',
       'c', 'e', 'l', '_', 'l', 'e', 'a', 'd' };
 
+    static const char_T tmp_9[13] = { 'u', 's', 'e', '_', 'd', 'o', 'w', 'n',
+      '_', 'd', 'a', 't', 'a' };
+
     // InitializeConditions for Memory: '<S1>/Memory'
     microaccel_DW.Memory_PreviousInput = microaccel_P.Memory_InitialCondition;
 
@@ -525,14 +539,14 @@ void microaccel_initialize(void)
     // End of SystemInitialize for SubSystem: '<S17>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S17>/SourceBlock'
-    microaccel_DW.obj_k.matlabCodegenIsDeleted = false;
-    microaccel_DW.obj_k.isInitialized = 1;
+    microaccel_DW.obj_ke.matlabCodegenIsDeleted = false;
+    microaccel_DW.obj_ke.isInitialized = 1;
     b_zeroDelimTopic[0] = 'v';
     b_zeroDelimTopic[1] = 'e';
     b_zeroDelimTopic[2] = 'l';
     b_zeroDelimTopic[3] = '\x00';
     Sub_microaccel_559.createSubscriber(&b_zeroDelimTopic[0], 1);
-    microaccel_DW.obj_k.isSetupComplete = true;
+    microaccel_DW.obj_ke.isSetupComplete = true;
 
     // End of SystemInitialize for SubSystem: '<S1>/Subscribe8'
 
@@ -712,16 +726,31 @@ void microaccel_initialize(void)
     microaccel_DW.obj_e.matlabCodegenIsDeleted = false;
     microaccel_DW.obj_e.isInitialized = 1;
     for (i = 0; i < 16; i++) {
-      b_zeroDelimName[i] = tmp_8[i];
+      microaccel_B.b_zeroDelimName[i] = tmp_8[i];
     }
 
-    b_zeroDelimName[16] = '\x00';
-    ParamGet_microaccel_585.initialize(&b_zeroDelimName[0]);
+    microaccel_B.b_zeroDelimName[16] = '\x00';
+    ParamGet_microaccel_585.initialize(&microaccel_B.b_zeroDelimName[0]);
     ParamGet_microaccel_585.initialize_error_codes(0, 1, 2, 3);
     ParamGet_microaccel_585.set_initial_value(-4.5);
     microaccel_DW.obj_e.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S1>/Get Parameter'
+
+    // Start for MATLABSystem: '<S1>/Get Parameter1'
+    microaccel_DW.obj_k.matlabCodegenIsDeleted = false;
+    microaccel_DW.obj_k.isInitialized = 1;
+    for (i = 0; i < 13; i++) {
+      b_zeroDelimName[i] = tmp_9[i];
+    }
+
+    b_zeroDelimName[13] = '\x00';
+    ParamGet_microaccel_631.initialize(&b_zeroDelimName[0]);
+    ParamGet_microaccel_631.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_microaccel_631.set_initial_value(false);
+    microaccel_DW.obj_k.isSetupComplete = true;
+
+    // End of Start for MATLABSystem: '<S1>/Get Parameter1'
   }
 }
 
@@ -730,8 +759,8 @@ void microaccel_terminate(void)
 {
   // Terminate for Atomic SubSystem: '<S1>/Subscribe8'
   // Terminate for MATLABSystem: '<S17>/SourceBlock'
-  if (!microaccel_DW.obj_k.matlabCodegenIsDeleted) {
-    microaccel_DW.obj_k.matlabCodegenIsDeleted = true;
+  if (!microaccel_DW.obj_ke.matlabCodegenIsDeleted) {
+    microaccel_DW.obj_ke.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S17>/SourceBlock'
@@ -786,6 +815,13 @@ void microaccel_terminate(void)
 
   // End of Terminate for MATLABSystem: '<S13>/SourceBlock'
   // End of Terminate for SubSystem: '<S1>/Subscribe'
+
+  // Terminate for MATLABSystem: '<S1>/Get Parameter1'
+  if (!microaccel_DW.obj_k.matlabCodegenIsDeleted) {
+    microaccel_DW.obj_k.matlabCodegenIsDeleted = true;
+  }
+
+  // End of Terminate for MATLABSystem: '<S1>/Get Parameter1'
 
   // Terminate for Atomic SubSystem: '<S1>/Publish1'
   // Terminate for MATLABSystem: '<S8>/SinkBlock'

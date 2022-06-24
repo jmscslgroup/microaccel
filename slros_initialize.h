@@ -41,6 +41,9 @@ extern SimulinkPublisher<std_msgs::Float64, SL_Bus_microaccel_std_msgs_Float64> 
 // For Block microaccel/MicroAccel/Get Parameter
 extern SimulinkParameterGetter<real64_T, double> ParamGet_microaccel_585;
 
+// For Block microaccel/MicroAccel/Get Parameter1
+extern SimulinkParameterGetter<boolean_T, bool> ParamGet_microaccel_631;
+
 void slros_node_init(int argc, char** argv);
 
 #endif

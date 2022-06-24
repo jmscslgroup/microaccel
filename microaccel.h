@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'microaccel'.
 //
-// Model version                  : 3.204
+// Model version                  : 3.210
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Sun Jun 19 18:16:15 2022
+// C/C++ source code generated on : Thu Jun 23 20:00:45 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -48,6 +48,7 @@ struct B_microaccel_T {
   SL_Bus_microaccel_geometry_msgs_Twist In1_e;// '<S22>/In1'
   SL_Bus_microaccel_geometry_msgs_Twist In1_n;// '<S20>/In1'
   SL_Bus_microaccel_geometry_msgs_Twist BusAssignment1;// '<S1>/Bus Assignment1' 
+  char_T b_zeroDelimName[17];
   SL_Bus_microaccel_ros_time_Time r;
   real_T v_des_data;
   real_T v_des_dot;
@@ -61,18 +62,20 @@ struct B_microaccel_T {
   SL_Bus_microaccel_std_msgs_Float64 In1_i;// '<S21>/In1'
   SL_Bus_microaccel_std_msgs_Float64 In1_k;// '<S19>/In1'
   SL_Bus_microaccel_std_msgs_Float64 b_varargout_2_m;
+  SL_Bus_microaccel_std_msgs_Float64 BusAssignment5;// '<S1>/Bus Assignment5'
 };
 
 // Block states (default storage) for system '<Root>'
 struct DW_microaccel_T {
   ros_slros_internal_block_Curr_T obj; // '<S1>/Current Time2'
+  ros_slros_internal_block_GetP_T obj_k;// '<S1>/Get Parameter1'
   ros_slros_internal_block_GetP_T obj_e;// '<S1>/Get Parameter'
   ros_slroscpp_internal_block_P_T obj_n;// '<S12>/SinkBlock'
   ros_slroscpp_internal_block_P_T obj_nj;// '<S11>/SinkBlock'
   ros_slroscpp_internal_block_P_T obj_nb;// '<S10>/SinkBlock'
   ros_slroscpp_internal_block_P_T obj_n5;// '<S9>/SinkBlock'
   ros_slroscpp_internal_block_P_T obj_c;// '<S8>/SinkBlock'
-  ros_slroscpp_internal_block_S_T obj_k;// '<S17>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_ke;// '<S17>/SourceBlock'
   ros_slroscpp_internal_block_S_T obj_n0;// '<S16>/SourceBlock'
   ros_slroscpp_internal_block_S_T obj_h;// '<S15>/SourceBlock'
   ros_slroscpp_internal_block_S_T obj_d;// '<S14>/SourceBlock'

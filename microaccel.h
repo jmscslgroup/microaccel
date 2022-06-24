@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'microaccel'.
 //
-// Model version                  : 3.210
+// Model version                  : 3.211
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Thu Jun 23 20:00:45 2022
+// C/C++ source code generated on : Thu Jun 23 21:51:53 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -41,15 +41,16 @@
 
 // Block signals (default storage)
 struct B_microaccel_T {
-  SL_Bus_microaccel_std_msgs_Float64MultiArray In1;// '<S18>/In1'
+  SL_Bus_microaccel_std_msgs_Float64MultiArray In1;// '<S20>/In1'
   SL_Bus_microaccel_std_msgs_Float64MultiArray b_varargout_2;
   SL_Bus_microaccel_std_msgs_MultiArrayDimension b_varargout_2_Layout_Dim[16];
   real_T b_varargout_2_Data[128];
-  SL_Bus_microaccel_geometry_msgs_Twist In1_e;// '<S22>/In1'
-  SL_Bus_microaccel_geometry_msgs_Twist In1_n;// '<S20>/In1'
+  SL_Bus_microaccel_geometry_msgs_Twist In1_e;// '<S24>/In1'
+  SL_Bus_microaccel_geometry_msgs_Twist In1_n;// '<S22>/In1'
   SL_Bus_microaccel_geometry_msgs_Twist BusAssignment1;// '<S1>/Bus Assignment1' 
   char_T b_zeroDelimName[17];
   SL_Bus_microaccel_ros_time_Time r;
+  char_T b_zeroDelimName_m[14];
   real_T v_des_data;
   real_T v_des_dot;
   real_T v_max;
@@ -59,9 +60,9 @@ struct B_microaccel_T {
   real_T Subtract2;                    // '<S1>/Subtract2'
   real_T TotalTime2;                   // '<S1>/Total Time2'
   real_T Subtract1;                    // '<S1>/Subtract1'
-  SL_Bus_microaccel_std_msgs_Float64 In1_i;// '<S21>/In1'
-  SL_Bus_microaccel_std_msgs_Float64 In1_k;// '<S19>/In1'
-  SL_Bus_microaccel_std_msgs_Float64 b_varargout_2_m;
+  SL_Bus_microaccel_std_msgs_Float64 In1_i;// '<S23>/In1'
+  SL_Bus_microaccel_std_msgs_Float64 In1_k;// '<S21>/In1'
+  SL_Bus_microaccel_std_msgs_Float64 b_varargout_2_c;
   SL_Bus_microaccel_std_msgs_Float64 BusAssignment5;// '<S1>/Bus Assignment5'
 };
 
@@ -70,16 +71,17 @@ struct DW_microaccel_T {
   ros_slros_internal_block_Curr_T obj; // '<S1>/Current Time2'
   ros_slros_internal_block_GetP_T obj_k;// '<S1>/Get Parameter1'
   ros_slros_internal_block_GetP_T obj_e;// '<S1>/Get Parameter'
-  ros_slroscpp_internal_block_P_T obj_n;// '<S12>/SinkBlock'
-  ros_slroscpp_internal_block_P_T obj_nj;// '<S11>/SinkBlock'
-  ros_slroscpp_internal_block_P_T obj_nb;// '<S10>/SinkBlock'
-  ros_slroscpp_internal_block_P_T obj_n5;// '<S9>/SinkBlock'
-  ros_slroscpp_internal_block_P_T obj_c;// '<S8>/SinkBlock'
-  ros_slroscpp_internal_block_S_T obj_ke;// '<S17>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_n0;// '<S16>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_h;// '<S15>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_d;// '<S14>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_ep;// '<S13>/SourceBlock'
+  ros_slroscpp_internal_block_P_T obj_g;// '<S14>/SinkBlock'
+  ros_slroscpp_internal_block_P_T obj_n;// '<S13>/SinkBlock'
+  ros_slroscpp_internal_block_P_T obj_nj;// '<S12>/SinkBlock'
+  ros_slroscpp_internal_block_P_T obj_nb;// '<S11>/SinkBlock'
+  ros_slroscpp_internal_block_P_T obj_n5;// '<S10>/SinkBlock'
+  ros_slroscpp_internal_block_P_T obj_c;// '<S9>/SinkBlock'
+  ros_slroscpp_internal_block_S_T obj_ke;// '<S19>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_n0;// '<S18>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_h;// '<S17>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_d;// '<S16>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_ep;// '<S15>/SourceBlock'
   real_T Memory_PreviousInput;         // '<S1>/Memory'
   real_T previous_v_max;               // '<S1>/MATLAB Function'
   real_T previous_v_des;               // '<S1>/MATLAB Function'
@@ -95,25 +97,28 @@ struct DW_microaccel_T {
 // Parameters (default storage)
 struct P_microaccel_T_ {
   SL_Bus_microaccel_std_msgs_Float64MultiArray Out1_Y0;// Computed Parameter: Out1_Y0
-                                                          //  Referenced by: '<S18>/Out1'
+                                                          //  Referenced by: '<S20>/Out1'
 
   SL_Bus_microaccel_std_msgs_Float64MultiArray Constant_Value;// Computed Parameter: Constant_Value
-                                                                 //  Referenced by: '<S13>/Constant'
+                                                                 //  Referenced by: '<S15>/Constant'
 
   SL_Bus_microaccel_geometry_msgs_Twist Constant_Value_j;// Computed Parameter: Constant_Value_j
                                                             //  Referenced by: '<S2>/Constant'
 
   SL_Bus_microaccel_geometry_msgs_Twist Out1_Y0_k;// Computed Parameter: Out1_Y0_k
-                                                     //  Referenced by: '<S20>/Out1'
-
-  SL_Bus_microaccel_geometry_msgs_Twist Constant_Value_n;// Computed Parameter: Constant_Value_n
-                                                            //  Referenced by: '<S15>/Constant'
-
-  SL_Bus_microaccel_geometry_msgs_Twist Out1_Y0_f;// Computed Parameter: Out1_Y0_f
                                                      //  Referenced by: '<S22>/Out1'
 
-  SL_Bus_microaccel_geometry_msgs_Twist Constant_Value_p;// Computed Parameter: Constant_Value_p
+  SL_Bus_microaccel_geometry_msgs_Twist Constant_Value_n;// Computed Parameter: Constant_Value_n
                                                             //  Referenced by: '<S17>/Constant'
+
+  SL_Bus_microaccel_geometry_msgs_Twist Out1_Y0_f;// Computed Parameter: Out1_Y0_f
+                                                     //  Referenced by: '<S24>/Out1'
+
+  SL_Bus_microaccel_geometry_msgs_Twist Constant_Value_p;// Computed Parameter: Constant_Value_p
+                                                            //  Referenced by: '<S19>/Constant'
+
+  SL_Bus_microaccel_std_msgs_Bool Constant_Value_i;// Computed Parameter: Constant_Value_i
+                                                      //  Referenced by: '<S7>/Constant'
 
   SL_Bus_microaccel_std_msgs_Float64 Constant_Value_jy;// Computed Parameter: Constant_Value_jy
                                                           //  Referenced by: '<S3>/Constant'
@@ -128,16 +133,16 @@ struct P_microaccel_T_ {
                                                          //  Referenced by: '<S6>/Constant'
 
   SL_Bus_microaccel_std_msgs_Float64 Out1_Y0_j;// Computed Parameter: Out1_Y0_j
-                                                  //  Referenced by: '<S19>/Out1'
-
-  SL_Bus_microaccel_std_msgs_Float64 Constant_Value_g;// Computed Parameter: Constant_Value_g
-                                                         //  Referenced by: '<S14>/Constant'
-
-  SL_Bus_microaccel_std_msgs_Float64 Out1_Y0_m;// Computed Parameter: Out1_Y0_m
                                                   //  Referenced by: '<S21>/Out1'
 
-  SL_Bus_microaccel_std_msgs_Float64 Constant_Value_k;// Computed Parameter: Constant_Value_k
+  SL_Bus_microaccel_std_msgs_Float64 Constant_Value_g;// Computed Parameter: Constant_Value_g
                                                          //  Referenced by: '<S16>/Constant'
+
+  SL_Bus_microaccel_std_msgs_Float64 Out1_Y0_m;// Computed Parameter: Out1_Y0_m
+                                                  //  Referenced by: '<S23>/Out1'
+
+  SL_Bus_microaccel_std_msgs_Float64 Constant_Value_k;// Computed Parameter: Constant_Value_k
+                                                         //  Referenced by: '<S18>/Constant'
 
   real_T Gain2_Gain;                   // Expression: 1e-9
                                           //  Referenced by: '<S1>/Gain2'
@@ -237,22 +242,24 @@ extern "C" {
 //  '<S4>'   : 'microaccel/MicroAccel/Blank Message3'
 //  '<S5>'   : 'microaccel/MicroAccel/Blank Message4'
 //  '<S6>'   : 'microaccel/MicroAccel/Blank Message5'
-//  '<S7>'   : 'microaccel/MicroAccel/MATLAB Function'
-//  '<S8>'   : 'microaccel/MicroAccel/Publish1'
-//  '<S9>'   : 'microaccel/MicroAccel/Publish2'
-//  '<S10>'  : 'microaccel/MicroAccel/Publish3'
-//  '<S11>'  : 'microaccel/MicroAccel/Publish4'
-//  '<S12>'  : 'microaccel/MicroAccel/Publish5'
-//  '<S13>'  : 'microaccel/MicroAccel/Subscribe'
-//  '<S14>'  : 'microaccel/MicroAccel/Subscribe2'
-//  '<S15>'  : 'microaccel/MicroAccel/Subscribe4'
-//  '<S16>'  : 'microaccel/MicroAccel/Subscribe6'
-//  '<S17>'  : 'microaccel/MicroAccel/Subscribe8'
-//  '<S18>'  : 'microaccel/MicroAccel/Subscribe/Enabled Subsystem'
-//  '<S19>'  : 'microaccel/MicroAccel/Subscribe2/Enabled Subsystem'
-//  '<S20>'  : 'microaccel/MicroAccel/Subscribe4/Enabled Subsystem'
-//  '<S21>'  : 'microaccel/MicroAccel/Subscribe6/Enabled Subsystem'
-//  '<S22>'  : 'microaccel/MicroAccel/Subscribe8/Enabled Subsystem'
+//  '<S7>'   : 'microaccel/MicroAccel/Blank Message6'
+//  '<S8>'   : 'microaccel/MicroAccel/MATLAB Function'
+//  '<S9>'   : 'microaccel/MicroAccel/Publish1'
+//  '<S10>'  : 'microaccel/MicroAccel/Publish2'
+//  '<S11>'  : 'microaccel/MicroAccel/Publish3'
+//  '<S12>'  : 'microaccel/MicroAccel/Publish4'
+//  '<S13>'  : 'microaccel/MicroAccel/Publish5'
+//  '<S14>'  : 'microaccel/MicroAccel/Publish6'
+//  '<S15>'  : 'microaccel/MicroAccel/Subscribe'
+//  '<S16>'  : 'microaccel/MicroAccel/Subscribe2'
+//  '<S17>'  : 'microaccel/MicroAccel/Subscribe4'
+//  '<S18>'  : 'microaccel/MicroAccel/Subscribe6'
+//  '<S19>'  : 'microaccel/MicroAccel/Subscribe8'
+//  '<S20>'  : 'microaccel/MicroAccel/Subscribe/Enabled Subsystem'
+//  '<S21>'  : 'microaccel/MicroAccel/Subscribe2/Enabled Subsystem'
+//  '<S22>'  : 'microaccel/MicroAccel/Subscribe4/Enabled Subsystem'
+//  '<S23>'  : 'microaccel/MicroAccel/Subscribe6/Enabled Subsystem'
+//  '<S24>'  : 'microaccel/MicroAccel/Subscribe8/Enabled Subsystem'
 
 #endif                                 // RTW_HEADER_microaccel_h_
 

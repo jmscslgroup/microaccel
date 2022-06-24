@@ -38,6 +38,9 @@ extern SimulinkPublisher<std_msgs::Float64, SL_Bus_microaccel_std_msgs_Float64> 
 // For Block microaccel/MicroAccel/Publish5
 extern SimulinkPublisher<std_msgs::Float64, SL_Bus_microaccel_std_msgs_Float64> Pub_microaccel_612;
 
+// For Block microaccel/MicroAccel/Publish6
+extern SimulinkPublisher<std_msgs::Bool, SL_Bus_microaccel_std_msgs_Bool> Pub_microaccel_635;
+
 // For Block microaccel/MicroAccel/Get Parameter
 extern SimulinkParameterGetter<real64_T, double> ParamGet_microaccel_585;
 

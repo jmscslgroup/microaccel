@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'microaccel'.
 //
-// Model version                  : 3.210
+// Model version                  : 3.211
 // Simulink Coder version         : 9.5 (R2021a) 14-Nov-2020
-// C/C++ source code generated on : Thu Jun 23 20:00:45 2022
+// C/C++ source code generated on : Thu Jun 23 21:51:53 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -56,6 +56,17 @@ struct SL_Bus_microaccel_geometry_msgs_Twist
 struct SL_Bus_microaccel_std_msgs_Float64
 {
   real_T Data;
+};
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_SL_Bus_microaccel_std_msgs_Bool_
+#define DEFINED_TYPEDEF_FOR_SL_Bus_microaccel_std_msgs_Bool_
+
+// MsgType=std_msgs/Bool
+struct SL_Bus_microaccel_std_msgs_Bool
+{
+  boolean_T Data;
 };
 
 #endif
